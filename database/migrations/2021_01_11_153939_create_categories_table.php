@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +12,13 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
+    use HasFactory;
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description',1000);
             $table->timestamps();
         });
     }

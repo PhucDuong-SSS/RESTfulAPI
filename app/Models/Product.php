@@ -2,10 +2,49 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Seller;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
+
+    const AVAILABLE_PRODUCT = 'available';
+    const UNAVAILABLE_PRODUCT = 'unavailable';
+
+    protected $fillable =  [
+        'name',
+        'description',
+        'quantity',
+        'status',
+        'image',
+        'seller_id',
+        'category_id'
+
+    ];
+
+    public $timestamps = false;
+
+
+    public function isAvailable()
+    {
+        return $this->status == Product::AVAILABLE_PRODUCT;
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
