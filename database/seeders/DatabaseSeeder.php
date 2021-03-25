@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $faker  =Faker::create();
         $gender =$faker->randomElement(['male','female']);
-       foreach (range(1,200) as $index)
+       foreach (range(1,1000) as $index)
         {
             DB::table('users')->insert([
                 'name'=> $faker->name,
